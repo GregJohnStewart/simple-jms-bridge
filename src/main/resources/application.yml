@@ -1,0 +1,16 @@
+
+amq-processing:
+  consuming:
+    server:
+      host: ""
+      port: 0
+      user: ""
+      pass: ""
+    address: ""
+  producing:
+    server:
+      host: ""
+      port: ""
+      user: ""
+      pass: ""
+    address: ""
