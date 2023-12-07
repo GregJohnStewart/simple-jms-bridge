@@ -21,7 +21,7 @@ public class AmqpConfig {
         return new JmsConnectionFactory(
                 config.user(),
                 config.pass(),
-                config.host() + ":" + config.port()
+                "amqp://" + config.host() + ":" + config.port()
         );
     }
 
