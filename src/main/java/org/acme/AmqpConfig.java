@@ -4,7 +4,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
+import jakarta.jms.ConnectionFactory;
+import org.apache.qpid.jms.JmsConnectionFactory;
 
 public class AmqpConfig {
 
@@ -16,24 +17,24 @@ public class AmqpConfig {
 //        return new AMQPConnectionDetails("amqp://localhost:5672");
 //    }
 
-    private ActiveMQConnectionFactory getConnectionFactory(RouteConfigs.AmqServerConfig config){
-        return new ActiveMQConnectionFactory(
-                config.host() + ":" + config.port(),
+    private ConnectionFactory getConnectionFactory(RouteConfigs.AmqServerConfig config){
+        return new JmsConnectionFactory(
                 config.user(),
-                config.pass()
+                config.pass(),
+                config.host() + ":" + config.port()
         );
     }
 
     @ApplicationScoped
     @Named("consumingConnectionFactory")
     @Produces
-    public ActiveMQConnectionFactory consumingConnectionFactory(){
+    public ConnectionFactory consumingConnectionFactory(){
         return this.getConnectionFactory(this.routeConfig.consuming().server());
     }
     @ApplicationScoped
     @Named("producingConnectionFactory")
     @Produces
-    public ActiveMQConnectionFactory producingConnectionFactory(){
+    public ConnectionFactory producingConnectionFactory(){
         return this.getConnectionFactory(this.routeConfig.producing().server());
     }
 
