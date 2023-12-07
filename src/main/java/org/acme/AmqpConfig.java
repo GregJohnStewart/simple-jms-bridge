@@ -5,17 +5,16 @@ import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
-import org.apache.camel.component.amqp.AMQPConnectionDetails;
 
 public class AmqpConfig {
 
     @Inject
     RouteConfigs routeConfig;
 
-    @Produces
-    AMQPConnectionDetails amqpConnection() {
-        return new AMQPConnectionDetails("amqp://localhost:5672");
-    }
+//    @Produces
+//    AMQPConnectionDetails amqpConnection() {
+//        return new AMQPConnectionDetails("amqp://localhost:5672");
+//    }
 
     private ActiveMQConnectionFactory getConnectionFactory(RouteConfigs.AmqServerConfig config){
         return new ActiveMQConnectionFactory(
